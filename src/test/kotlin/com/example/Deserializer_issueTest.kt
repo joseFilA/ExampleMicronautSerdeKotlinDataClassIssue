@@ -22,14 +22,11 @@ class Deserializer_issueTest @Inject constructor(
 
         // With nullIsSameAsDefault = false, a null in JSON overrides the default
         val fromNull = objectMapper.readValue(jsonWithNull, TestMe::class.java)
-        println(fromNull) // MyData(value=null)
         assertEquals(null, fromNull.testString) //FAILS - default value set
 
         // A missing field still uses the default value
         val fromMissing = objectMapper.readValue(jsonWithMissing, TestMe::class.java)
-
-        println(fromMissing) // MyData(value=default)
-        assertEquals("I AM DEFAULT", fromNull.testString)
+        assertEquals("I AM DEFAULT", fromMissing.testString)
     }
 
 }
